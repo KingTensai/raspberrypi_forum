@@ -12,7 +12,7 @@
         <p class="mb-4">{{ $news->content }}</p>
 
         <div class="space-x-2">
-            <a href="{{ route('news.edit', $news) }}" class="text-yellow-600">Edit</a>
+            <a href="{{ route('news.edit', $news) }}php " class="text-yellow-600">Edit</a>
             <form action="{{ route('news.destroy', $news) }}" method="POST" class="inline-block" onsubmit="return confirm('Are you sure?');">
                 @csrf
                 @method('DELETE')

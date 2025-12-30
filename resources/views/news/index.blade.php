@@ -15,7 +15,7 @@
         @foreach($news as $item)
             <div class="border p-4 rounded mb-4">
                 <h2 class="text-xl font-semibold">{{ $item->title }}</h2>
-                <p class="text-gray-600 text-sm">By {{ $item->user->username ?? $item->user->email }} | {{ $item->created_at->format('d M Y') }}</p>
+                <p class="text-gray-600 text-sm">By {{ $item->user->name ?? $item->user->email }} | {{ $item->created_at->format('d M Y') }}</p>
                 @if($item->image)
                     <img src="{{ asset('storage/' . $item->image) }}" class="mt-2 max-h-48 w-auto rounded" alt="News Image">
                 @endif

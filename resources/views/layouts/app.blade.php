@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Raspberry Pi Forum</title>
-    @vite('resources/css/app.css') <!-- Breeze default -->
+    @vite('resources/css/app.css')
+    @vite('resources/js/app.js')
 </head>
 <body class="bg-gray-100 min-h-screen flex flex-col">
 
-<!-- Navbar -->
 <nav class="bg-gray-800 text-white">
     <div class="container mx-auto px-4 py-3 flex justify-between items-center">
         <a href="{{ url('/') }}" class="font-bold text-xl">RPi Forum</a>
@@ -18,7 +18,7 @@
             <a href="{{ url('/faq') }}" class="hover:underline">FAQ</a>
             <a href="{{ url('/contact') }}" class="hover:underline">Contact</a>
             @auth
-                <a href="{{ route('profile.show', auth()->user()) }}" class="hover:underline">Profile</a>
+                <a href="{{ route('profile.edit', auth()->user()) }}" class="hover:underline">Profile</a>
                 <form action="{{ route('logout') }}" method="POST" class="inline">
                     @csrf
                     <button type="submit" class="hover:underline">Logout</button>
@@ -34,7 +34,6 @@
     </div>
 </nav>
 
-<!-- Flash Messages -->
 <div class="container mx-auto px-4 mt-4">
     @if(session('success'))
         <div class="bg-green-100 text-green-800 p-3 rounded mb-4">

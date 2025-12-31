@@ -4,32 +4,25 @@ namespace App\Http\Controllers;
 
 use App\Models\News;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 
 class NewsController extends Controller
 {
-    /**
-     * Display a listing of the news.
-     */
     public function index()
     {
         $news = News::latest()->paginate(10); // paginated list
         return view('news.index', compact('news'));
     }
 
-    /**
-     * Show the form for creating a new news item.
-     */
     public function create()
     {
         return view('news.create');
     }
 
-    /**
-     * Store a newly created news item in storage.
-     */
     public function store(Request $request)
     {
+        Log:: info($request -> content);
         $request->validate([
             'title' => 'required|string|max:255',
             'content' => 'required|string',
@@ -44,15 +37,13 @@ class NewsController extends Controller
         if ($request->hasFile('image')) {
             $news->image = $request->file('image')->store('news_images', 'public');
         }
+        Log::info('Form submitted:', $request->all());
 
         $news->save();
 
         return redirect()->route('news.index')->with('success', 'News created successfully.');
     }
 
-    /**
-     * Display the specified news item.
-     */
     public function show(News $news)
     {
         return view('news.show', compact('news'));

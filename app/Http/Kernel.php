@@ -6,6 +6,10 @@ use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
 {
+    public function __construct($app, $router)
+    {
+        dd('KERNEL LOADED');
+    }
     protected $middleware = [
         \App\Http\Middleware\TrustProxies::class,
         \Fruitcake\Cors\HandleCors::class,
@@ -39,3 +43,4 @@ class Kernel extends HttpKernel
     ];
 
 }
+

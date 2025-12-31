@@ -16,7 +16,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // Create a default admin user
         User::create([
             'name' => 'admin',
             'email' => 'admin@ehb.be',
@@ -24,7 +23,6 @@ class DatabaseSeeder extends Seeder
             'is_admin' => true,
         ]);
 
-        // Create 3 regular users
         User::create([
             'name' => 'maarten_gortz',
             'email' => 'maarten@ehb.be',
@@ -45,8 +43,5 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make('Password123!'),
             'is_admin' => false,
         ]);
-
-        // Optionally, create additional random users using factory
-        // User::factory(10)->create();
     }
 }

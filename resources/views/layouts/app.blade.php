@@ -18,13 +18,13 @@
             <a href="{{ url('/faq') }}" class="hover:underline">FAQ</a>
             <a href="{{ url('/contact') }}" class="hover:underline">Contact</a>
             @auth
-                <a href="{{ route('profile.edit', auth()->user()) }}" class="hover:underline">Profile</a>
+                <a href="{{ route('profile.show', auth()->user()) }}" class="hover:underline">Profile</a>
                 <form action="{{ route('logout') }}" method="POST" class="inline">
                     @csrf
                     <button type="submit" class="hover:underline">Logout</button>
                 </form>
                 @if(auth()->user()->is_admin)
-                    <a href="{{ route('news.create') }}" class="hover:underline font-semibold">Admin Panel</a>
+                    <a href="{{ route('admin.show') }}" class="hover:underline font-semibold">Admin Panel</a>
                 @endif
             @else
                 <a href="{{ route('login') }}" class="hover:underline">Login</a>

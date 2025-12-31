@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 use Illuminate\Support\Facades\Storage;
 
-class ProfileController extends Controller
+class AdminController extends Controller
 {
     /**
      * Display the user's profile form.
@@ -26,11 +26,10 @@ class ProfileController extends Controller
     /**
      * Display a user's profile by ID.
      */
-    public function show($id)
+    public function show()
     {
-        $user = User::findOrFail($id);
-
-        return view('profile.show', compact('user')); // points to resources/views/profile/show.blade.php
+        $users = User::all();
+        return view('admin.show',compact('users'));
     }
 
     /**
@@ -58,7 +57,7 @@ class ProfileController extends Controller
 
         $user->save();
         return Redirect::route('profile.show', ['user' => $user->id])
-        ->with('status', 'profile-updated');
+            ->with('status', 'profile-updated');
     }
 
     /**

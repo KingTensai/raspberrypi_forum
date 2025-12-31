@@ -10,7 +10,7 @@
             </div>
         @endif
 
-        <a href="{{ route('news.create') }}" class="bg-blue-500 text-white px-4 py-2 rounded mb-4 inline-block">Create New</a>
+        <a href="{{ route('news.create') }}" class="bg-blue-500 text-blue-600 px-4 py-2 rounded mb-4 inline-block">Create New</a>
 
         @foreach($news as $item)
             <div class="border p-4 rounded mb-4">

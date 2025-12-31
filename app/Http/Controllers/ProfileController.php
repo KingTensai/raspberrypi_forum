@@ -40,10 +40,8 @@ class ProfileController extends Controller
     {
         $user = $request->user();
 
-        // Fill validated fields
         $user->fill($request->validated());
 
-        // Handle profile photo upload if included
         if ($request->hasFile('photo')) {
             if ($user->photo_path) {
                 Storage::delete($user->photo_path);
@@ -51,7 +49,6 @@ class ProfileController extends Controller
             $user->photo_path = $request->file('photo')->store('profile-photos', 'public');
         }
 
-        // Reset email verification if email changed
         if ($user->isDirty('email')) {
             $user->email_verified_at = null;
         }

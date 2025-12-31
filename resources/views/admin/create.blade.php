@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container mx-auto px-4">
-        <h1 class="text-2xl font-bold mb-4">Edit Profile: {{ $user->name }}</h1>
+        <h1 class="text-2xl font-bold mb-4">Create User: </h1>
 
         @if ($errors->any())
             <div class="bg-red-100 text-red-800 p-2 mb-4 rounded">
@@ -20,9 +20,9 @@
             </div>
         @endif
 
-        <form action="{{ route('profile.update', $user) }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('admin.store', $user) }}" method="POST" enctype="multipart/form-data">
             @csrf
-            @method('PATCH')
+            @method('POST')
 
             <div class="mb-4">
                 <label for="name" class="block mb-1 font-semibold">Name</label>
@@ -43,21 +43,29 @@
                     class="border p-2 w-full rounded"
                 >{{ old('description', $user->description ?? '') }}</textarea>
             </div>
-            @if(auth()->check() && auth()->user()->is_admin)
-                <div class="mb-4 flex items-center">
-                    <input
-                        type="checkbox"
-                        name="is_admin"
-                        id="is_admin"
-                        value="1"
-                        class="mr-2"
-                        {{ old('is_admin', $user->is_admin ?? false) ? 'checked' : '' }}
-                    >
-                    <label for="is_admin" class="font-semibold">
-                        Admin user
-                    </label>
-                </div>
-            @endif
+            <div class="mb-4">
+                <label for="password" class="block mb-1 font-semibold">Password</label>
+                <input
+                    type="password"
+                    name="password"
+                    id="password"
+                    class="border p-2 w-full rounded"
+                    required
+                >
+            </div>
+
+            <div class="mb-4">
+                <label for="password_confirmation" class="block mb-1 font-semibold">
+                    Confirm Password
+                </label>
+                <input
+                    type="password"
+                    name="password_confirmation"
+                    id="password_confirmation"
+                    class="border p-2 w-full rounded"
+                    required
+                >
+            </div>
             <div class="mb-4">
                 <label for="photo" class="block mb-1 font-semibold">Profile Photo</label>
                 @if($user->photo_path)
@@ -65,9 +73,21 @@
                 @endif
                 <input type="file" name="photo" id="photo" class="border p-2 w-full rounded">
             </div>
-
+            <div class="mb-4 flex items-center">
+                <input
+                    type="checkbox"
+                    name="is_admin"
+                    id="is_admin"
+                    value="1"
+                    class="mr-2"
+                    {{ old('is_admin', $user->is_admin ?? false) ? 'checked' : '' }}
+                >
+                <label for="is_admin" class="font-semibold">
+                    Admin user
+                </label>
+            </div>
             <button type="submit" class="bg-blue-500 text-blue-500 px-4 py-2 rounded hover:bg-blue-600">
-                Update Profile
+                Create user
             </button>
         </form>
     </div>

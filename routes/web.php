@@ -23,6 +23,12 @@ Route::get('/profile/{user}', [ProfileController::class, 'show'])->name('profile
 
 Route::resource('news', NewsController::class);
 Route::get('/admin', [AdminController::class, 'show'])->name('admin.show');
+Route::post('news',[NewsController::class, 'store'])->name('news.store');
+Route::get('/admin/create', [AdminController::class, 'create'])->name('admin.create');
+
+Route::post('/admin', [AdminController::class, 'store'])->name('admin.store');
+
+
 
 
 

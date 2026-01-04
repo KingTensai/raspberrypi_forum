@@ -3,7 +3,6 @@
 @section('content')
     <div class="container mx-auto px-4">
         <h1 class="text-2xl font-bold mb-2">{{ $news->title }}</h1>
-        <p class="text-gray-600 mb-4">By {{ $news->user->username ?? $news->user->email }} | {{ $news->created_at->format('d M Y') }}</p>
 
         @if($news->image)
             <img src="{{ asset('storage/' . $news->image) }}" class="mb-4 max-h-96 w-auto rounded" alt="News Image">
@@ -21,8 +20,6 @@
         </div>
 
         <a href="{{ route('news.index') }}" class="mt-4 inline-block text-blue-500 mb-8">Back to list</a>
-
-        {{-- Comments Section --}}
         <hr class="my-6">
 
         <h2 class="text-xl font-semibold mb-4">Comments ({{ $news->comments->count() }})</h2>
@@ -40,7 +37,7 @@
                 <div class="mb-4">
                     <textarea name="content" rows="3" class="border p-2 w-full rounded" placeholder="Add a comment..." required>{{ old('content') }}</textarea>
                 </div>
-                <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Post Comment</button>
+                <button type="submit" class="bg-blue-500 text-blue-500 px-4 py-2 rounded">Post Comment</button>
             </form>
         @else
             <p class="text-gray-600 mt-4">Please <a href="{{ route('login') }}" class="text-blue-500 underline">login</a> to add a comment.</p>

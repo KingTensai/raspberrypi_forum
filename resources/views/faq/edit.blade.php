@@ -27,7 +27,7 @@
             <input type="number" name="order" class="border p-2 w-full rounded">
         </div>
 
-        <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Save FAQ</button>
+        <button type="submit" class="bg-blue-500 text-blue-500 px-4 py-2 rounded">Save FAQ</button>
     </form>
 
 @endsection

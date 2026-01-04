@@ -11,8 +11,10 @@ class FaqController extends Controller
 {
     public function show()
     {
-        $faqs = FAQ::with('category')->orderBy('order')->get();
-        return view('faq.show', compact('faqs'));
+
+        $news = FAQ::orderBy('fas')->orderBy('created_at', 'desc')->get()->groupBy('type');
+
+        return view('news.index', compact('news'));
     }
 
     public function create()
@@ -30,7 +32,12 @@ class FaqController extends Controller
             'order' => 'integer|nullable',
         ]);
 
-        FAQ::create($request->all());
+        FAQ::create([
+            'faq_category_id' => $request->category_id,
+            'question' => $request->question,
+            'answer' => $request->answer,
+            'is_published' => $request->is_published ?? true,
+        ]);
 
         return redirect()->route('faq.index')
             ->with('success', 'FAQ created!');

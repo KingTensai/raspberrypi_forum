@@ -16,7 +16,7 @@
         <div class="space-x-4">
             <a href="{{ route('news.index') }}" class="hover:underline">News</a>
             <a href="{{ url('/faq') }}" class="hover:underline">FAQ</a>
-            <a href="{{ url('/contact') }}" class="hover:underline">Contact</a>
+            <a href="{{ route('contact.show') }}" class="hover:underline">Contact</a>
             @auth
                 <a href="{{ route('profile.show', auth()->user()) }}" class="hover:underline">Profile</a>
                 <form action="{{ route('logout') }}" method="POST" class="inline">

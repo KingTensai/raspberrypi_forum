@@ -6,6 +6,7 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\AdminController;
+use App\Http\Middleware\AdminMiddleware;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -34,14 +35,13 @@ Route::post('/admin', [AdminController::class, 'store'])->name('admin.store');
 Route::get('/contact', [ContactController::class, 'show']);
 Route::post('/contact', [ContactController::class, 'sendmail'])->name('contact.send');
 
-Route::prefix('admin')->middleware(['auth', 'is_admin'])->group(function () {
+
+Route::get('/faq', [App\Http\Controllers\FAQController::class, 'show'])->name('faq.index');
+Route::prefix('admin')->middleware(['auth', AdminMiddleware::class])->group(function () {
     Route::resource('faq-categories', App\Http\Controllers\Admin\FaqCategoryController::class);
     Route::resource('faqs', App\Http\Controllers\Admin\FaqController::class);
 });
-
-// Public FAQ page
-//Route::get('/faq', [App\Http\Controllers\FaqController::class, 'show'])->name('faq.index');
-
+Route::get('/contact', [ContactController::class, 'show'])->name('contact.show');
 
 Route::post('/news/{news}/comments', [CommentController::class, 'store'])
     ->middleware('auth')

@@ -10,7 +10,7 @@ use Illuminate\View\View;
 
 class ContactController extends Controller
 {
-    public function sendmail(Request $request)
+    public function sendmail(Request $request): \Illuminate\Http\RedirectResponse
     {
         $validated = $request->validate([
             'name'    => 'required|string',
@@ -28,7 +28,7 @@ class ContactController extends Controller
     }
     public function show(Request $request): View
     {
-        return view('profile.edit', [
+        return view('contact.show', [
             'user' => $request->user(),
         ]);
     }

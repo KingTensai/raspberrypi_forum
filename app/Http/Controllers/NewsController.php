@@ -22,7 +22,6 @@ class NewsController extends Controller
 
     public function store(Request $request)
     {
-        Log:: info($request -> content);
         $request->validate([
             'title' => 'required|string|max:255',
             'content' => 'required|string',
@@ -37,7 +36,6 @@ class NewsController extends Controller
         if ($request->hasFile('image')) {
             $news->image = $request->file('image')->store('news_images', 'public');
         }
-        Log::info('Form submitted:', $request->all());
 
         $news->save();
 

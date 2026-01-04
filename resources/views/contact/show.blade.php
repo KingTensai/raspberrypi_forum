@@ -14,7 +14,7 @@
             </div>
         @endif
 
-        <form method="POST" action="{{ route('contact.mail') }}">
+        <form method="POST" action="{{ route('contact.send') }}">
             @csrf
 
             <div class="mb-4">

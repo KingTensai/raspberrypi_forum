@@ -15,19 +15,20 @@
         @foreach($news as $item)
             <div class="border p-4 rounded mb-4">
                 <h2 class="text-xl font-semibold">{{ $item->title }}</h2>
-                <p class="text-gray-600 text-sm">By {{ $item->user->name ?? $item->user->email }} | {{ $item->created_at->format('d M Y') }}</p>
                 @if($item->image)
                     <img src="{{ asset('storage/' . $item->image) }}" class="mt-2 max-h-48 w-auto rounded" alt="News Image">
                 @endif
                 <p class="mt-2">{{ Str::limit($item->content, 150) }}</p>
                 <div class="mt-2 space-x-2">
                     <a href="{{ route('news.show', $item) }}" class="text-blue-600">View</a>
+                    @if(auth()->check() && auth()->user()->is_admin)
                     <a href="{{ route('news.edit', $item) }}" class="text-yellow-600">Edit</a>
                     <form action="{{ route('news.destroy', $item) }}" method="POST" class="inline-block" onsubmit="return confirm('Are you sure?');">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="text-red-600">Delete</button>
                     </form>
+                    @endif
                 </div>
             </div>
         @endforeach

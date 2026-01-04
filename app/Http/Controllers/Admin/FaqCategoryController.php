@@ -15,9 +15,9 @@ class FaqCategoryController extends Controller
         return view('admin.faq_categories.index', compact('categories'));
     }
 
-    public function create()
+    public function create(): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
     {
-        return view('admin.faq_categories.create');
+        return view('faq.edit-category');
     }
 
     public function store(Request $request)
@@ -35,9 +35,9 @@ class FaqCategoryController extends Controller
             ->with('success', 'Category created!');
     }
 
-    public function edit(FAQCategory $faqCategory)
+    public function edit()
     {
-        return view('admin.faq_categories.edit', compact('faqCategory'));
+        return view('admin.faq_categories.edit');
     }
 
     public function update(Request $request, FAQCategory $faqCategory)

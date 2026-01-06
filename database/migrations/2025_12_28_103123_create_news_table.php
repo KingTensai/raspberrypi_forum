@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('author')->nullable();
             $table->boolean('is_published')->default(false);
             $table->timestamp('published_at')->nullable();
+            $table->string('image')->nullable();
             $table->timestamps();
         });
     }

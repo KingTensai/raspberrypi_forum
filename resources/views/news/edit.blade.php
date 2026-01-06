@@ -35,7 +35,7 @@
                 <label class="block mt-2 mb-1">Change Image</label>
                 <input type="file" name="image" class="border p-2 w-full rounded">
             </div>
-            <button type="submit" class="bg-yellow-500 text-white px-4 py-2 rounded">Update</button>
+            <button type="submit" class="bg-yellow-500 text-blue-500 px-4 py-2 rounded">Update</button>
         </form>
     </div>
 @endsection

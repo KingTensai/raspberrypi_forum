@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Mail\ContactMail;
+use App\Models\ContactMessage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\View\View;
@@ -24,6 +25,7 @@ class ContactController extends Controller
                 $validated['email'],
                 $validated['message']
             ));
+        ContactMessage::create($validated);
         return back()->with('success', 'Message sent!');
     }
     public function show(Request $request): View

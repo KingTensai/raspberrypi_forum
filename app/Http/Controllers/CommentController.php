@@ -11,14 +11,13 @@ class CommentController extends Controller
 {
     public function store(Request $request, News $news)
     {
-        $request->validate([
-            'content' => 'required|string|max:1000',
+        $validated = $request->validate([
+            'content' => 'required|string|min:1',
         ]);
 
-        Comment::create([
-            'news_id' => $news->id,
-            'user_id' => Auth::id(),
-            'content' => $request->content,
+        $news->comments()->create([
+            'user_id' => auth()->id(),
+            'content' => $validated['content'],
         ]);
 
         return back()->with('success', 'Comment added!');

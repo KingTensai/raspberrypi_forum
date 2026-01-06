@@ -8,35 +8,36 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\ContactReplyMail;
+use Illuminate\Support\Facades\View;
 
 class ContactMessageController extends Controller
 {
-    public function index()
+    public function index(): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
     {
         $messages = ContactMessage::latest()->paginate(10);
-        return view('admin.contact_messages.index', compact('messages'));
+        return view('admin.show-message', compact('messages'));
     }
 
-    public function show(ContactMessage $contactMessage)
+    public function show(ContactMessage $message)
     {
-        return view('admin.contact_messages.show', compact('contactMessage'));
+        return view('admin.single-message', compact('message'));
     }
 
-    public function update(Request $request, ContactMessage $contactMessage)
+    public function update(Request $request, $id)
     {
         $request->validate([
-            'reply' => 'required|string',
+            'reply_message' => 'required|string',
         ]);
 
-        $contactMessage->update([
-            'reply' => $request->reply,
-            'replied_by' => Auth::id(),
+        $message = ContactMessage::findOrFail($id);
+
+        $message->update([
+            'reply' => $request->reply_message,
+            'replied_at' => now(),
         ]);
 
-        // Send reply email to user
-        Mail::to($contactMessage->email)->send(new ContactReplyMail($contactMessage));
+        Mail::to($message->email)->send(new ContactReplyMail($message));
 
-        return redirect()->route('admin.contact-messages.index')
-            ->with('success', 'Reply sent!');
+        return back()->with('success', 'Answer sent to ' . $message->email);
     }
 }

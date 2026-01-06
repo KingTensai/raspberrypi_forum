@@ -1,8 +1,11 @@
-@extends('layouts.app')
+@extends(auth()->check() ? 'layouts.app' : 'layouts.guest')
 
 @section('content')
     <div class="flex justify-between items-center mb-4">
         <h1 class="text-2xl font-bold">Users List</h1>
+        <a href="{{ route('contact-messages.index') }}" class="bg-green-500 text-blue-500 px-4 py-2 rounded hover:bg-green-600">
+            Contact Messages
+        </a>
         <a href="{{ route('admin.create') }}" class="bg-green-500 text-blue-500 px-4 py-2 rounded hover:bg-green-600">
             Create Profile
         </a>

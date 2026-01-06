@@ -7,31 +7,30 @@
     @vite('resources/css/app.css')
     @vite('resources/js/app.js')
 </head>
-<body class="bg-gray-100 min-h-screen flex flex-col">
+<body class="bg-slate-50 min-h-screen flex flex-col">
 
-<nav class="bg-gray-800 text-white">
+<nav class="bg-slate-900 text-rose-400 border-b-2 border-rose-600 shadow-sm">
     <div class="container mx-auto px-4 py-3 flex justify-between items-center">
-        <a href="{{ url('/') }}" class="font-bold text-xl">RPi Forum</a>
+        <a href="{{ url('/') }}" class="font-bold text-xl hover:text-rose-400 transition-colors">RPi Forum</a>
         <div class="space-x-4">
-            <a href="{{ route('news.index') }}" class="hover:underline">News</a>
-            <a href="{{ url('/faq') }}" class="hover:underline">FAQ</a>
-            <a href="{{ url('/contact') }}" class="hover:underline">Contact</a>
-            <a href="{{ route('login') }}" class="hover:underline">Login</a>
-            <a href="{{ route('register') }}" class="hover:underline">Register</a>
+            <a href="{{ route('news.index') }}" class="hover:text-rose-400 transition-colors">News</a>
+            <a href="{{ url('/faq') }}" class="hover:text-rose-400 transition-colors">FAQ</a>
+            <a href="{{ url('/contact') }}" class="hover:text-rose-400 transition-colors">Contact</a>
+            <a href="{{ route('login') }}" class="hover:text-rose-400 transition-colors">Login</a>
+            <a href="{{ route('register') }}" class="bg-rose-600 hover:bg-rose-700 text-white px-3 py-1.5 rounded text-sm font-medium transition-colors shadow-sm">Register</a>
         </div>
     </div>
 </nav>
 
-<!-- Flash Messages -->
 <div class="container mx-auto px-4 mt-4">
     @if(session('success'))
-        <div class="bg-green-100 text-green-800 p-3 rounded mb-4">
+        <div class="bg-emerald-50 border border-emerald-200 text-emerald-800 p-3 rounded mb-4 shadow-sm">
             {{ session('success') }}
         </div>
     @endif
 
     @if(session('error'))
-        <div class="bg-red-100 text-red-800 p-3 rounded mb-4">
+        <div class="bg-rose-50 border border-rose-200 text-rose-800 p-3 rounded mb-4 shadow-sm">
             {{ session('error') }}
         </div>
     @endif
@@ -41,9 +40,9 @@
     @yield('content')
 </main>
 
-<footer class="bg-gray-800 text-white py-4 mt-auto">
+<footer class="bg-slate-900 text-slate-400 py-4 mt-auto border-t border-slate-800">
     <div class="container mx-auto px-4 text-center">
-        &copy; {{ date('Y') }} Raspberry Pi Forum. All rights reserved.
+        &copy; {{ date('Y') }} <span class="text-rose-500 font-semibold">Raspberry Pi Forum</span>. All rights reserved.
     </div>
 </footer>
 

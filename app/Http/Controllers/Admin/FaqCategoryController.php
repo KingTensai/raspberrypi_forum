@@ -31,7 +31,7 @@ class FaqCategoryController extends Controller
             'slug' => Str::slug($request->name),
         ]);
 
-        return redirect()->route('admin.faq-categories.index')
+        return redirect()->route('faq.index')
             ->with('success', 'Category created!');
     }
 

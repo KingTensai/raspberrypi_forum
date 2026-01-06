@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends(auth()->check() ? 'layouts.app' : 'layouts.guest')
 
 @section('content')
     <div class="container mx-auto px-4">
@@ -18,7 +18,7 @@
                 @if($item->image)
                     <img src="{{ asset('storage/' . $item->image) }}" class="mt-2 max-h-48 w-auto rounded" alt="News Image">
                 @endif
-                <p class="mt-2">{{ Str::limit($item->content, 150) }}</p>
+                <p>{{ $item->content }}</p>
                 <div class="mt-2 space-x-2">
                     <a href="{{ route('news.show', $item) }}" class="text-blue-600">View</a>
                     @if(auth()->check() && auth()->user()->is_admin)

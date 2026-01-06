@@ -9,9 +9,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Middleware\AdminMiddleware;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::redirect('/', '/dashboard');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -47,7 +45,9 @@ Route::post('/news/{news}/comments', [CommentController::class, 'store'])
     ->middleware('auth')
     ->name('news.comments.store');
 
-Route::prefix('admin')->middleware(['auth','is_admin'])->group(function () {
-    Route::resource('contact-messages', ContactMessageController::class)->only(['index','show','update']);
-});
+Route::get('/messages', [ContactMessageController::class, 'index'])->name('contact-messages.index');
+
+Route::get('/messages/{message}', [ContactMessageController::class, 'show'])->name('contact-messages.show');
+Route::put('/admin/messages/{message}', [ContactMessageController::class, 'update'])
+    ->name('admin.contact-messages.update');
 require __DIR__.'/auth.php';

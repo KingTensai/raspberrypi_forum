@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends(auth()->check() ? 'layouts.app' : 'layouts.guest')
 
 @section('content')
     <div class="max-w-4xl mx-auto py-10">
@@ -19,7 +19,7 @@
                 @endif
             @endauth
         </div>
-
+    <br>
         @foreach($categories as $category)
             @if($category->faqs->isNotEmpty())
                 <div class="mb-8">

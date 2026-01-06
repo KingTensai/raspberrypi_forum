@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class News extends Model
 {
-    public $content;
     protected $fillable = ['title', 'content', 'user_id', 'is_published', 'published_at'];
     public function user()
     {

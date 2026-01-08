@@ -33,6 +33,16 @@
                 <input type="email" name="email" id="email" value="{{ old('email', $user->email) }}" class="border p-2 w-full rounded" required>
             </div>
             <div class="mb-4">
+                <label for="birthday" class="block mb-1 font-semibold">Birthday</label>
+                <input
+                    type="date"
+                    name="birthday"
+                    id="birthday"
+                    value="{{ old('birthday', $user->birthday ? $user->birthday->format('Y-m-d') : '') }}"
+                    class="border p-2 w-full rounded"
+                >
+            </div>
+            <div class="mb-4">
                 <label for="description" class="block mb-1 font-semibold">
                     Description / Bio
                 </label>

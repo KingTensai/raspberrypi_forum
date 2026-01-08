@@ -13,9 +13,7 @@ use Illuminate\Support\Facades\Storage;
 
 class ProfileController extends Controller
 {
-    /**
-     * Display the user's profile form.
-     */
+
     public function edit(Request $request): View
     {
         return view('profile.edit', [
@@ -23,9 +21,7 @@ class ProfileController extends Controller
         ]);
     }
 
-    /**
-     * Display a user's profile by ID.
-     */
+
     public function show($id)
     {
         $user = User::findOrFail($id);
@@ -33,11 +29,9 @@ class ProfileController extends Controller
         return view('profile.show', compact('user')); // points to resources/views/profile/show.blade.php
     }
 
-    /**
-     * Update the user's profile information.
-     */
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
+      //  dd($request->all());
         $user = $request->user();
 
         $user->fill($request->validated());
@@ -58,9 +52,6 @@ class ProfileController extends Controller
         ->with('status', 'profile-updated');
     }
 
-    /**
-     * Delete the user's account.
-     */
     public function destroy(Request $request): RedirectResponse
     {
         $request->validateWithBag('userDeletion', [
@@ -71,7 +62,6 @@ class ProfileController extends Controller
 
         Auth::logout();
 
-        // Delete profile photo if exists
         if ($user->photo_path) {
             Storage::delete($user->photo_path);
         }

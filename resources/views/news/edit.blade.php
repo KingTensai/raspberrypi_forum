@@ -21,6 +21,10 @@
                 <label class="block mb-1">Title</label>
                 <input type="text" name="title" value="{{ old('title', $news->title) }}" class="border p-2 w-full rounded" required>
             </div>
+            <div class="text-sm text-gray-600 mb-6 italic">
+                Date {{ $news->publication_date->format('d-m-Y H:i') }}
+                ({{ $news->publication_date->diffForHumans() }})
+            </div>
             <div class="mb-4">
                 <label class="block mb-1">Content</label>
                 <textarea name="content" class="border p-2 w-full rounded" rows="5" required>{{ old('content', $news->content) }}</textarea>

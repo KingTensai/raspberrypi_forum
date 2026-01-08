@@ -14,8 +14,10 @@ Volg deze stappen om het project op je lokale machine uit te voeren:
      env. file in de correcte directory zetten 
 
 4.  **Database inrichten:**
-    php artisan migrate
-    php artisan db:seed
+    php artisan migrate:fresh --seed
+            ADMIN LOGIN na seeding
+    'email => 'admin@ehb.be',
+    password => 'Admin123!',
 
 5.  **Bestandsopslag koppelen:**
     php artisan storage:link

@@ -15,4 +15,7 @@ class News extends Model
     {
         return $this->hasMany(Comment::class);
     }
+    protected $casts = [
+        'publication_date' => 'datetime',
+    ];
 }

@@ -3,7 +3,10 @@
 @section('content')
     <div class="container mx-auto px-4">
         <h1 class="text-2xl font-bold mb-2">{{ $news->title }}</h1>
-
+        <div class="text-sm text-gray-600 mb-6 italic">
+            Date: {{ $news->publication_date->format('d-m-Y H:i') }}
+            ({{ $news->publication_date->diffForHumans() }})
+        </div>
         @if($news->image)
             <img src="{{ asset('storage/' . $news->image) }}" class="mb-4 max-h-96 w-auto rounded" alt="News Image">
         @endif
